@@ -1,5 +1,5 @@
 import pandas as pd
-
+import matplotlib.pyplot as plt
 
 df = pd.read_csv("strong.csv")
 exercises = df["Exercise Name"].unique()
@@ -17,4 +17,5 @@ while x < 1 or x > len(exercises):
 
 data = df.loc[df["Exercise Name"] == exercises[x-1]]
 data = data.sort_values(by=["Set Order"])
-print(data)
+data.plot.scatter(x='Weight', y='Reps', title = exercises[x-1])
+plt.show()

@@ -1,5 +1,7 @@
-import pandas as pd
-import matplotlib.pyplot as plt
+import numpy as np 
+import pandas as pd 
+import seaborn as sns 
+import matplotlib.pyplot as plt 
 from scipy import stats
 
 #overtime you would expect the trend line to be around the targeted rep range
@@ -13,25 +15,24 @@ for i in exercises:
     print(f"{count+1}: {i}")
     count += 1
 
-
-
-x = int(input("Choose exercise: "))
-while x < 1 or x > len(exercises):
+choice = int(input("Choose exercise: "))
+while choice < 1 or choice > len(exercises):
     print("Invalid index! ")
-    x = int(input("Choose exercise: "))
+    choice = int(input("Choose exercise: "))
 
-data = df.loc[df["Exercise Name"] == exercises[x-1]]
-data = data.sort_values(by=["Set Order"])
+data = df.loc[df["Exercise Name"] == exercises[choice-1]]
+data_weight = data[["Weight", "Reps"]]
 
-slope, intercept, r, p, std_err = stats.linregress(data["Weight"], data["Reps"])
+#plot two lines, straight line around rep range and one of linear regress
+slope, intercept, r, p, std_err = stats.linregress(data_weight["Weight"], data_weight["Reps"])
 
 def myfunc(x):
   return slope * x + intercept
 
-mymodel = list(map(myfunc, data["Weight"]))
+mymodel = list(map(myfunc, data_weight["Weight"]))
 
+plt.scatter(data_weight["Weight"], data_weight["Reps"])
+plt.plot(data_weight["Weight"], mymodel)
 
-plt.scatter(data["Weight"], data["Reps"])
-plt.plot(data["Weight"], mymodel)
-#data.plot.scatter(x='Weight', y='Reps', title = exercises[x-1])
-plt.show()
+#sns.lmplot(x="Weight", y="Reps", data = data_weight )
+plt.show() 

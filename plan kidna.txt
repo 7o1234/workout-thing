@@ -1,0 +1,14 @@
+what we have:
+weights and reps
+trendline
+rep range
+
+what we need:
+a way to figure out the best next data point
+	- added data needs to make trendline closer to 0 slope and intercept within rep range
+	- how do you choose next weight
+		- if hightest weight is within rep range then use it
+		- if not then check if second highest weight is within rep range and use it. If it is in the higher end of the rep range, suggest an a 5lb increment if the increase is not the highest weight
+progressive overload:
+- increasing reps and weight
+- if trendline is overall positive then it is good
